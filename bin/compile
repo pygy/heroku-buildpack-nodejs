@@ -158,19 +158,20 @@ CACHED_SCONS="$CACHE_DIR/scons/${SCONS_VERSION}"
 
 # download and unpack packages
 echo "-----> Fetching Node.js binaries if needed"
-if [ ! -e "{$CACHED_NODE}/bin/node" ]; 
+if [ ! -e "{$CACHED_NODE}/bin/node" ]; then
   mkdir -p "$CACHED_NODE";
   package_download "nodejs" "${NODE_VERSION}" "${CACHED_NODE}";
 fi
 
-if [ ! -e "${CACHED_NPM}/cli.js" ]; 
+if [ ! -e "${CACHED_NPM}/cli.js" ]; then
   mkdir -p "${CACHED_NPM}";
   package_download "npm" "${NPM_VERSION}" "${CACHED_NPM}";
 fi
-if [ ! -e "${CACHED_SCONS}/scons.py" ]; 
-  mkdir -p "${CACHED_SCONS}";
-package_download "scons" "${SCONS_VERSION}" "${CACHED_SCONS}"
 
+if [ ! -e "${CACHED_SCONS}/scons.py" ]; then
+  mkdir -p "${CACHED_SCONS}";
+  package_download "scons" "${SCONS_VERSION}" "${CACHED_SCONS}"
+fi
 # vendor node into the slug
 PATH="$BUILD_DIR/bin:$PATH"
 echo "-----> Vendoring node into slug"

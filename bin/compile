@@ -19,6 +19,8 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
+echo "BUILD_DIR: ${BUILD_DIR}\nCACHE_DIR: ${CACHE_DIR}"
+
 function error() {
   echo " !     $*" >&2
   exit 1
@@ -169,6 +171,8 @@ if [ ! -e "${CACHED_NPM}/cli.js" ]; then
 fi
 
 if [ ! -e "${CACHED_SCONS}/scons.py" ]; then
+  echo "Scons not cached"
+  echo `ls ${CACHED_SCONS}/`
   mkdir -p "${CACHED_SCONS}";
   package_download "scons" "${SCONS_VERSION}" "${CACHED_SCONS}"
 fi
